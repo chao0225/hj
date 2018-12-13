@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>品位极致，醇香四溢</title>
+		<link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css" />
+		<link rel="stylesheet" href="css/animate.min.css">
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/common.js"></script>
+		
+	</head>
+	<body>
+		<!--头部第一行-->
+		<header id="header"></header>
+		<!--置顶-->
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop">↑</a>
+		</div>
+		<!--海报-->
+		<div id="my-poster">
+			<div id="demo" class="carousel" data-ride="carousel">
+			<!--轮播结构-->
+			<div class="carousel" @mouseenter="enter" @mouseleave="leave">
+					<transition-group
+							tag="ul"
+							name="image"
+							enter-active-class="animated lightSpeedIn"
+							leave-active-class="animated lightSpeedOut"
+					>
+						<li v-for='(image,index) in img' :key='index' v-show="index === mark">
+							<a href="javascript:;">
+								<img :src="image">
+							</a>
+						</li>
+					</transition-group>
+					<div class="bullet">
+						<span v-for="(item,index) in img.length" :class="{'active':index === mark}"
+						@click="change(index)" :key="index"></span>
+					</div>
+					<div class="switch">
+						<span class="prev" @click="prev">&lt;</span>
+						<span class="next" @click="next">&gt;</span>
+					</div>
+				</div>
+
+				
+			</div>
+			<div id="poster">
+				<p id="poster-p1">品位一种极致·醇香四溢</p>
+				<p id="poster-p2">Taste&nbsp;Is&nbsp;a&nbsp;Kind&nbsp;Of&nbsp;Ultimate&nbsp;Mellow&nbsp;Fragrance</p>
+			</div>
+		</div>	
+		<!--精品推荐-->		
+        <div class="mainBox">
+            <div class="lay_5 clearfix">
+                <div class="lay_3_tle">
+                    <span></span><p>精品酒推荐</p><span></span>
+                </div>
+                <div class="lay_5_left">
+                    <a href="https://www.winex-hk.com/item/203690.html" target="_blank"><img src="img/20180928191134_2281.jpg" alt="蓓姬城堡副牌干红葡萄酒2012" /></a>
+                </div>
+                <div class="lay_5_center">
+                    <a style="display: block;background-color: #e0e6fe;" href="https://www.winex-hk.com/item/203529.html" target="_blank"><img src="img/20180930200207_4183.png" alt="精品酒" /></a>
+					<div id="lb_3">
+						<ul>
+							<li><img src="img/20180928192131_1041.jpg" alt="" width="474" height="302"/></li>
+							<li><img src="img/20180928192055_6406.jpg" alt="" width="474" height="302"/></li>	
+						</ul>
+						<div>
+							<p class="active"></p><p></p>
+						</div>
+					</div>
+                </div>
+                <div class="lay_5_right_pro clearfix">
+					<div class="lay_5_right_pro1">
+						<a href="https://www.winex-hk.com/item/203537.html" target="_blank"><img src="/img/20180930113007_1988.png" alt="史密斯拉菲城堡干红葡萄酒2011 " /></a>
+					</div>
+					<div class="lay_5_right_pro2">
+						<a href="https://www.winex-hk.com/item/203526.html" target="_blank"><img src="img/20180930113016_9703.png" alt="雪兰城堡干红葡萄酒2015" /></a>
+					</div>
+					<div class="lay_5_right_pro3">
+						<a href="https://www.winex-hk.com/item/203643.html" target="_blank"><img src="img/20180930113027_6118.png" alt="马利哥城堡副牌干红葡萄酒2013" /></a>
+					</div>
+					<div class="lay_5_right_pro4">
+						<a href="https://www.winex-hk.com/item/203662.html" target="_blank"><img src="img/20180930113039_0036.png" alt="歌碧城堡干红葡萄酒2014 " /></a>
+					</div>
+					<div class="lay_5_right_pro5">
+						<a href="https://www.winex-hk.com/item/203646.html" target="_blank"><img src="img/20180930113048_4758.png" alt="克莱蒙教皇城堡副牌干红葡萄酒2013 " /></a>
+					</div>
+					<div class="lay_5_right_pro6">
+						<a href="https://www.winex-hk.com/item/203542.html" target="_blank"><img src="img/20180930113059_0113.png" alt="荔仙城堡干红葡萄酒2014 " /></a>
+					</div>
+                </div>
+            </div>
+        </div>
+		<!--疯狂抢购-->
+		<div id="mainFox">
+            <div class="lay_6">
+				<div class="lay_6_left">
+					<span>疯狂抢购</span>
+					<!--banner2 start-->
+					<div class="swiper_2">
+							<div>
+								<img src="img/20180928185111_2154.jpg">
+								<img src="img/20180928185734_2205.jpg">
+								<img src="img/20180928185111_2154.jpg">
+								<img src="img/20180928185734_2205.jpg">
+							</div>
+							<div class="prev"><</div>
+							<div class="next">></div>
+					</div>
+					<!--banner2 end-->
+					<div class="indexAdImg1">
+							<a href="javascript:;"><img src="img/20180928185605_1025.jpg" alt="金玫瑰城堡副牌干红葡萄酒2013"/></a>
+					</div>
+				</div>
+				<div  class="lay_6_center">
+					<div class="lay_6_dh">
+						<span class="active">新品特惠</span>
+						<span>爆款精品</span>
+					</div>
+					<div class="center_sp">
+						<div>
+							<ul class="center_sp1">
+								<li>
+									<img src="img/6090_270_270_20151028093409.jpg" alt="">
+									<p>
+										<span>跨境</span>
+									克拉米伦城堡副牌干红葡萄酒2010 <br>
+									PASTOURELLE DE 
+									</p>
+									<span>法国</span>|<span> 1855梅多克列级酒</span>
+									<h4>¥ 459.00</h4>
+									<span>新品特惠</span>
+									<a href="javascript:;">
+										<i>加入购物车</i>
+									</a>
+								</li>
+								<li>
+									<img src="img/6090_270_270_20151028093409.jpg" alt="">
+									<p>
+										<span>跨境</span>
+									克拉米伦城堡副牌干红葡萄酒2010 <br>
+									PASTOURELLE DE 
+									</p>
+									<span>法国</span>|<span> 1855梅多克列级酒</span>
+									<h4>¥ 459.00</h4>
+									<span>新品特惠</span>
+									<a href="javascript:;">
+										<i>加入购物车</i>
+									</a>
+								</li>
+								<li>
+									<img src="img/6090_270_270_20151028093409.jpg" alt="">
+									<p>
+										<span>跨境</span>
+									克拉米伦城堡副牌干红葡萄酒2010 <br>
+									PASTOURELLE DE 
+									</p>
+									<span>法国</span>|<span> 1855梅多克列级酒</span>
+									<h4>¥ 459.00</h4>
+									<span>新品特惠</span>
+									<a href="javascript:;">
+										<i>加入购物车</i>
+									</a>
+								</li>
+								<li>
+									<img src="img/6090_270_270_20151028093409.jpg" alt="">
+									<p>
+										<span>跨境</span>
+									克拉米伦城堡副牌干红葡萄酒2010 <br>
+									PASTOURELLE DE 
+									</p>
+									<span>法国</span>|<span> 1855梅多克列级酒</span>
+									<h4>¥ 459.00</h4>
+									<span>新品特惠</span>
+									<a href="javascript:;">
+										<i>加入购物车</i>
+									</a>
+								</li>
+								<li>
+									<img src="img/6090_270_270_20151028093409.jpg" alt="">
+									<p>
+										<span>跨境</span>
+									克拉米伦城堡副牌干红葡萄酒2010 <br>
+									PASTOURELLE DE 
+									</p>
+									<span>法国</span>|<span> 1855梅多克列级酒</span>
+									<h4>¥ 459.00</h4>
+									<span>新品特惠</span>
+									<a href="javascript:;">
+										<i>加入购物车</i>
+									</a>
+								</li>
+								<li>
+									<img src="img/6090_270_270_20151028093409.jpg" alt="">
+									<p>
+										<span>跨境</span>
+									克拉米伦城堡副牌干红葡萄酒2010 <br>
+									PASTOURELLE DE 
+									</p>
+									<span>法国</span>|<span> 1855梅多克列级酒</span>
+									<h4>¥ 459.00</h4>
+									<span>新品特惠</span>
+									<a href="javascript:;">
+										<i>加入购物车</i>
+									</a>
+								</li>
+								<li>
+									<img src="img/6090_270_270_20151028093409.jpg" alt="">
+									<p>
+										<span>跨境</span>
+									克拉米伦城堡副牌干红葡萄酒2010 <br>
+									PASTOURELLE DE 
+									</p>
+									<span>法国</span>|<span> 1855梅多克列级酒</span>
+									<h4>¥ 459.00</h4>
+									<span>新品特惠</span>
+									<a href="javascript:;">
+										<i>加入购物车</i>
+									</a>
+								</li>
+								<li>
+									<img src="img/6090_270_270_20151028093409.jpg" alt="">
+									<p>
+										<span>跨境</span>
+									克拉米伦城堡副牌干红葡萄酒2010 <br>
+									PASTOURELLE DE 
+									</p>
+									<span>法国</span>|<span> 1855梅多克列级酒</span>
+									<h4>¥ 459.00</h4>
+									<span>新品特惠</span>
+									<a href="javascript:;">
+										<i>加入购物车</i>
+									</a>
+								</li>
+								
+							</ul>
+						</div>
+						<div>
+							<ul class="center_sp1">
+								<li>
+									<img src="img/6090_270_270_20151028093409.jpg" alt="">
+									<p>
+										<span>跨境</span>
+									克拉米伦城堡副牌干... <br>
+									PASTOURELLE DE CLER...
+									</p>
+									<span>法国</span>|<span> 1855梅多克列级酒</span>
+									<h4>¥ 842.00</h4>
+									<span>新品特惠</span>
+									<a href="javascript:;">
+										<i>加入购物车</i>
+									</a>
+								</li>
+								
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+				<div  class="lay_6_right">
+					<div></div>
+					<p></p>
+					<span></span>
+				</div>
+            </div>
+        	</div>
+		</div>
+
+		 <!-- Swiper -->
+		 <div class="swiper-container swiper-container-horizontal swiper-container-3d swiper-container-coverflow" style="cursor: grab;">
+			<div class="swiper-wrapper" id="gu">
+	
+				<div class="swiper-slide">
+					<div class="swiper-slide-shadow-left" style="opacity: 0; transition-duration: 0ms;"></div>
+					<div class="swiper-slide-shadow-right" style="opacity: 3; transition-duration: 0ms;"></div>
+					<ul>
+							<li>
+								<img src="img/15788_270_270_20150615023442.jpg" alt="">
+								<p>
+									<span>跨境</span>
+								克拉米伦城堡副牌干红葡萄酒2010 <br>
+								PASTOURELLE DE 
+								</p>
+								<span>法国</span>|<span> 1855梅多克列级酒</span>
+								<h4>¥ 459.00</h4>
+								<span>新品特惠</span>
+								<a href="javascript:;">
+										<i>加入购物车</i>
+								</a>
+							</li>
+							
+						</ul>
+				</div>
+	
+				<div class="swiper-slide">
+					<div class="swiper-slide-shadow-left" style="opacity: 0; transition-duration: 0ms;"></div>
+					<div class="swiper-slide-shadow-right" style="opacity: 2; transition-duration: 0ms;"></div>
+					<ul>
+							<li>
+								<img src="img/6090_270_270_20151028093409.jpg" alt="">
+								<p>
+									<span>跨境</span>
+								克拉米伦城堡副牌干红葡萄酒2010 <br>
+								PASTOURELLE DE 
+								</p>
+								<span>法国</span>|<span> 1855梅多克列级酒</span>
+								<h4>¥ 459.00</h4>
+								<span>新品特惠</span>
+								<a href="javascript:;">
+										<i>加入购物车</i>
+								</a>
+							</li>
+							
+						</ul>
+				</div>
+	
+				<div class="swiper-slide">
+					<div class="swiper-slide-shadow-left" style="opacity: 0; transition-duration: 0ms;"></div>
+					<div class="swiper-slide-shadow-right" style="opacity: 1; transition-duration: 0ms;"></div>
+					<ul>
+							<li>
+								<img src="img/8317_270_270_20160118031154.jpg" alt="">
+								<p>
+									<span>跨境</span>
+								克拉米伦城堡副牌干红葡萄酒2010 <br>
+								PASTOURELLE DE 
+								</p>
+								<span>法国</span>|<span> 1855梅多克列级酒</span>
+								<h4>¥ 459.00</h4>
+								<span>新品特惠</span>
+								<a href="javascript:;">
+										<i>加入购物车</i>
+								</a>
+							</li>
+							
+						</ul>
+				</div>
+	
+				<div class="swiper-slide">
+					<div class="swiper-slide-shadow-left" style="opacity: 0; transition-duration: 0ms;">
+							
+					</div>
+					<div class="swiper-slide-shadow-right" style="opacity: 0; transition-duration: 0ms;">
+						   
+					</div>
+					<ul>
+							<li>
+								<img src="img/32026_270_270_20181018051341.jpg" alt="">
+								<p>
+									<span>跨境</span>
+								克拉米伦城堡副牌干红葡萄酒2010 <br>
+								PASTOURELLE DE 
+								</p>
+								<span>法国</span>|<span> 1855梅多克列级酒</span>
+								<h4>¥ 459.00</h4>
+								<span>新品特惠</span>
+								<a href="javascript:;">
+										<i>加入购物车</i>
+								</a>
+							</li>
+							
+						</ul>
+				</div>
+	
+				<div class="swiper-slide">
+					<div class="swiper-slide-shadow-left" style="opacity: 0; transition-duration: 0ms;"></div>
+					<div class="swiper-slide-shadow-right" style="opacity: 4; transition-duration: 0ms;"></div>
+					<ul>
+							<li>
+								<img src="img/14728_270_270_20150515024241.jpg" alt="">
+								<p>
+									<span>跨境</span>
+								克拉米伦城堡副牌干红葡萄酒2010 <br>
+								PASTOURELLE DE 
+								</p>
+								<span>法国</span>|<span> 1855梅多克列级酒</span>
+								<h4>¥ 459.00</h4>
+								<span>新品特惠</span>
+								<a href="javascript:;">
+										<i>加入购物车</i>
+								</a>
+							</li>
+							
+						</ul>
+				</div>
+	
+				<div class="swiper-slide">
+					<div class="swiper-slide-shadow-left" style="opacity: 0; transition-duration: 0ms;"></div>
+					<div class="swiper-slide-shadow-right" style="opacity: 4; transition-duration: 0ms;"></div>
+					<ul>
+							<li>
+								<img src="img/30914_270_270_20180607100247.jpg" alt="">
+								<p>
+									<span>跨境</span>
+								克拉米伦城堡副牌干红葡萄酒2010 <br>
+								PASTOURELLE DE 
+								</p>
+								<span>法国</span>|<span> 1855梅多克列级酒</span>
+								<h4>¥ 459.00</h4>
+								<span>新品特惠</span>
+								<a href="javascript:;">
+										<i>加入购物车</i>
+								</a>
+							</li>
+							
+						</ul>
+				</div>
+	
+				<div class="swiper-slide">
+					<div class="swiper-slide-shadow-left" style="opacity: 0; transition-duration: 0ms;"></div>
+					<div class="swiper-slide-shadow-right" style="opacity: 4; transition-duration: 0ms;"></div>
+					<ul>
+							<li>
+								<img src="img/30744_270_270_20180508030140.jpg" alt="">
+								<p>
+									<span>跨境</span>
+								克拉米伦城堡副牌干红葡萄酒2010 <br>
+								PASTOURELLE DE 
+								</p>
+								<span>法国</span>|<span> 1855梅多克列级酒</span>
+								<h4>¥ 459.00</h4>
+								<span>新品特惠</span>
+								<a href="javascript:;">
+										<i>加入购物车</i>
+								</a>
+							</li>
+							
+						</ul>
+				</div>
+			   
+			</div>
+		   
+		</div>
+		<footer id="footer"></footer>
+		<script src="js/jquery-1.11.3.js"></script>
+		<!-- <script src="js/jquery-3.2.0.js"></script> -->
+		<script src="js//vue.js"></script>
+		<script src="js/swiper.min.js"></script>
+		<script src="js/vue-lunbo.js"></script>
+		<script src="js/header.js"></script>
+		<script src="js/footer.js"></script>
+		<script src="js/gun.js"></script>
+		<script src="js/index.js"></script>
+	</body>
+</html>

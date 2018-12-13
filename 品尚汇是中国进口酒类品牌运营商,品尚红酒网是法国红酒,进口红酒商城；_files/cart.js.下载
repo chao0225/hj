@@ -1,0 +1,284 @@
+var cart = {
+	cartnumflag:0, //购物车的商品数量标志
+	//改变数量的计算
+	changenum:function(action,o)
+	{
+		inputObj = $(o).parent('span').find("input");
+		if(action == 'minus')
+		{
+			var val = parseInt(inputObj.val()) - 1;
+			if(val > 0)
+			{
+				inputObj.val(val);
+			}
+			else
+			{
+				inputObj.val(1);
+			}
+		}
+		else if(action == 'plus')
+		{
+			var val = parseInt(inputObj.val()) + 1;
+			inputObj.val(val);
+		}
+		this.pricechange(inputObj);
+		this.reclare();
+	},
+	//弹出登录注册框
+	popLogin:function()
+	{
+		
+		/*Change these values to style your modal popup
+		var align = 'center';									//Valid values; left, right, center
+		var top = 100; 											//Use an integer (in pixels)
+		var width = 808; 										//Use an integer (in pixels)
+		var padding = 10;										//Use an integer (in pixels)
+		var backgroundColor = '#FFFFFF'; 						//Use any hex code
+		var source = 'flow_reg_div_bg'; 								//Refer to any page on your server, external pages are not valid e.g. http://www.google.co.uk
+		var borderColor = '#ccc'; 							//Use any hex code
+		var borderWeight = 4; 									//Use an integer (in pixels)
+		var borderRadius = 5; 									//Use an integer (in pixels)
+		var fadeOutTime = 300; 									//Use any integer, 0 = no fade
+		var disableColor = '#666666'; 							//Use any hex code
+		var disableOpacity = 40; 								//Valid range 0-100
+		var loadingImage = 'http://file.wine9.com/images/loadingPop.gif';		//Use relative path from this page
+		var type = 1;											// type=1是div,type=2是url,type=3是img
+		//This method initialises the modal popup
+		var obj = modalPopup(align, top, width, padding, disableColor, disableOpacity, backgroundColor, borderColor, borderWeight, borderRadius, fadeOutTime, source, loadingImage, type);
+		*/
+		$.blockUI({ 
+			message: $('#flow_reg_div_bg') ,
+			css: { 
+				top:  ($(window).height() - 324) /2 + 'px', 
+				left: ($(window).width() - 780) /2 + 'px',
+				width: '780px' ,
+				height: '324px',
+				cursor: 'default'
+			} 
+		}); 
+		return false;
+	},
+	//关闭弹窗
+	closeit:function()
+	{
+		setTimeout($.unblockUI, 60); 
+		return false;
+	},
+	//直接在input里面改数字
+	dirchangnum:function(o)
+	{
+		if($(o).val() <= 0)
+		{
+			alert("请您输入大于0的商品数量.");
+			return;
+		}
+		this.pricechange(o);
+		this.reclare();
+	},
+	//改变单品的金额
+	pricechange:function(o)
+	{
+		$("#RecId_"+$(o).attr('recid')).html((parseInt($(o).attr('price'))*parseInt($(o).val())).toFixed(1));
+	},
+	//计算整个购物车中的商品价格
+	reclare:function()
+	{
+		var inputArrs = $("input[attr='num_price']");
+		//alert(inputArrs.0.attr('val'));
+		var leng = inputArrs.length;
+		var num = 0;
+		var price = 0;
+		var int = 0;
+		for(var i=0;i < leng; i++ )
+		{
+			var tmp = inputArrs.eq(i);
+			num += parseFloat(tmp.val());
+			price += parseFloat(tmp.val()) * parseFloat(tmp.attr("price")) ;
+		}
+		int = parseInt(price);
+		$("#cartListNumId").html(num);
+		$("#cartListPriceId").html(price.toFixed(1));
+		$("#cartListPointId").html(int);
+		//更新购物车的数量
+		if(cart.cartnumflag > 0) clearTimeout(cart.cartnumflag);
+		cart.cartnumflag = setTimeout('cart.postnum()',500);
+	},
+	//提交购物车中产品的数量
+	postnum:function()
+	{
+		var data = $(document.forms['cartListForm']).serialize();
+		$.ajax({
+			type: "POST",
+			url: "/order.php?a=altercart",
+			data: data,
+			dataType: 'json',
+			success: function(msg){
+				if(msg.Code != 0)
+				{
+					alert(msg.Message);	
+				}
+			}
+		});
+	},
+	CheckAll : function(form,o){
+		for (var i=0;i<form.elements.length;i++){
+			var e = form.elements[i];
+			if ($(e).attr("attr") == 'goodsCheckBox')
+				e.checked = o.checked;
+		}
+	},
+	del:function(o)
+	{
+		var times = 0; //计算数量
+		var form = document.forms['cartListForm'];
+		for (var i=0;i<form.elements.length;i++){
+			var e = form.elements[i];
+			if ($(e).attr("attr") == 'goodsCheckBox' && $(e).attr("checked") == 'checked')
+			{
+				times = times + 1;
+			}
+		}
+		if(times == 0)
+		{
+			alert('您未选择商品.');	
+			return false;
+		}		
+		if(confirm("您确定删除购物车中的这几支酒吗？"))
+		{
+			
+			url = "/order.php?a=deletecart";
+			data = $(form).serialize();
+			$(".cart_items").html("加载中...");
+			$.ajax({
+				type: "GET",
+				url: url,
+				data:data,
+				success: function(msg){
+					$(".cart_items").html(msg);
+				}
+			});
+			
+		}
+	},
+	loadlist:function()
+	{
+		var url = '/order.php?a=getlist&ReturnUrl='+$("input[name='ReturnUrl']").val()+'&r='+Math.random();
+		$(".cart_items").html("加载中...");
+		$.ajax({
+			type: "GET",
+			url: url,
+			success: function(msg){
+				$(".cart_items").html(msg);
+			}
+		});
+	},
+
+	/*
+	 * 2014-06-09 官网改版 新增代码  start
+	 */
+
+
+	/**
+	 * 添加商品到购物车
+	 * @obj 当前对象
+	 * @gid 商品ID
+	 * @num 数量
+	 * @prom 活动编码
+	 * @imgurl 图片地址
+	 * @fromad 颠覆活动专用
+	 * = =|
+	 */
+	addToCart : function(obj, gid, num, prom, imgurl, fromad)
+	{
+
+		$.get('/order.php?a=addtocart&ajax=1',
+			{
+				sku : gid,
+				num : num,
+				code : prom,
+				FromAd : fromad ? fromad : '',
+				read : Math.random()
+			},
+			function(data){
+				if(data.Code == 0){
+					cart.flyToCart(obj, imgurl);
+					$("#index_ff_01 .cartNmu").html(parseInt(parseInt($("#index_ff_01 .cartNmu").html()) + parseInt(num)));
+				}else{
+					alert(data.Message);
+				}
+				
+			},
+			'json'
+		);
+	},
+
+	//商品飞入购物车动画
+	flyToCart : function(obj, imgurl)
+	{
+		var p1 = $(obj).offset();
+		var p2 = $("#index_ff_01").offset();
+		var num = Math.random().toString();
+		var flyid = 'fly-' + num.substr(2);
+		$('body').append("<div id='"+flyid+"' style='z-index:9999999;position:absolute; left:"+p1.left+"px;top:"+p1.top+"px;'><img src='"+imgurl+"' style='border:2px solid rgb(232,92,92)' width='40' height='40' /></div>");
+
+		$('#'+flyid).animate({
+			top : p2.top,
+			left : p2.left - 65
+			}, 'normal',
+			function(){
+				$('#'+flyid).animate({
+						left : p2.left,
+						opacity : '0.5'
+					},'slow',
+					function(){
+						$('#'+flyid).remove();
+					}
+					);
+			}
+		);
+	},
+
+	//悬浮购物车里面的删除商品
+	delCart : function(id,obj)
+	{
+		var cid = [];
+		cid.push(id);
+		$.get(
+			'/order.php?a=delCart',
+			{
+				cartid : cid
+			},
+			function(data){
+				if(data.Code == 0){
+					$(obj).parent().slideUp(function(){
+						$.get(
+							'/order.php?a=cartlist&ajax=1&type=json',
+							function(data){
+								$(obj).parents('#index_ff_01').find('.cartNmu').html(data.Data.num);
+								$(obj).parents('#index_ff_01').find('.gwc_hover .gwc_bottom p font strong').html(data.Data.price);
+								$(obj).parent().remove();
+							},
+							'json'
+						);
+					})
+				}else{
+					alert(data.Message);
+				}	
+			},
+			'json'
+		);	
+	},
+
+	//加载购物车信息
+	init : function	()
+	{
+		$.get(
+			'/order.php?a=cartlist&ajax=1',
+			function(data){
+				$("#index_ff_01 .gwc_hover").html(data);
+				$("#index_ff_01 .cartNmu").html($("#index_ff_01 .gwc_hover .gwc_bottom .cartNmu").html());
+			},
+			'text'
+		);
+	},
+}
