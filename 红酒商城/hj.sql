@@ -82,3 +82,11 @@ INSERT INTO `hj_user` VALUES ('1', 'dingding', '123456', 'ding@qq.com', '1351101
 INSERT INTO `hj_user` VALUES ('2', 'dangdang', '123456', 'dang@qq.com', '13501234568','当当喵','1');
 INSERT INTO `hj_user` VALUES ('3', 'doudou', '123456', 'dou@qq.com', '13501234569','豆豆','1');
 INSERT INTO `hj_user` VALUES ('4', 'yaya', '123456', 'ya@qq.com', '13501234560','丫丫','0');
+INSERT INTO `hj_user` VALUES ('5', 'dingding1', '123456', 'ding@qq.com', '13511011000','丁春秋','1');
+INSERT INTO `hj_user` VALUES ('6', 'dangdang1', '123456', 'dang@qq.com', '13501234568','当当喵','1');
+INSERT INTO `hj_user` VALUES ('7', 'doudou1', '123456', 'dou@qq.com', '13501234569','豆豆','1');
+INSERT INTO `hj_user` VALUES ('8', 'yaya1', '123456', 'ya@qq.com', '13501234560','丫丫','0');
+INSERT INTO `hj_user` VALUES ('9', 'dingding2', '123456', 'ding@qq.com', '13511011000','丁春秋','1');
+INSERT INTO `hj_user` VALUES ('10', 'dangdang2', '123456', 'dang@qq.com', '13501234568','当当喵','1');
+INSERT INTO `hj_user` VALUES ('11', 'doudou2', '123456', 'dou@qq.com', '13501234569','豆豆','1');
+INSERT INTO `hj_user` VALUES ('12', 'yaya2', '123456', 'ya@qq.com', '13501234560','丫丫','0');

@@ -71,11 +71,11 @@ router.get('/login',(req,res)=>{
 
 //用户列表
 router.get('/list',(req,res)=>{
-	var $size = parseInt(req.body.size);
-	var $page = parseInt(req.body.page);
-	var $bedin = ($page-1) * $size;			//计算分页查询的开始
+	// var $size = parseInt(req.body.size);
+	// var $page = parseInt(req.body.page);
+	// var $bedin = ($page-1) * $size;			//计算分页查询的开始
 	//bedin = (页码-1)*页码大小，count——页码大小
-	var sql = 'SELECT * FROM hj_user LIMIT ?,?'
+	var sql = 'SELECT * FROM hj_user '; 
 	pool.query(sql,(err,result)=>{
 		if(err) throw err;
 		if(result.length > 0){
@@ -84,29 +84,68 @@ router.get('/list',(req,res)=>{
 	});
 })
 
-router.get('/lyb',(req,res)=>{
-	var sql = 'SELECT * FROM redwine_lyb'
-	pool.query(sql,(err,result)=>{
-		if(err) throw err;
-		res.send(result);
-	})
-})
-
-router.post('/lybcontent',(req,res)=>{
-	var $content = req.body.content;
-	var reg = /^([\u4e00-\u9fa5]|\w|.|\s){1,50}$/;
-	if(!$content){
-		res.send('3')
-		return;
-	}else if(!reg.exec($content)){
-		res.send('2')
-		return;
+//3.删除用户
+router.get('/deleteUser',(req,res)=>{
+	var $uid=req.query.uid;
+	if(!$uid){
+	  res.send("uid不存在");
+	  return;
 	}
-	var sql = "INSERT INTO redwine_lyb VALUES (null,?)"
-	pool.query(sql,[$content],(err,result)=>{
-		if(err) throw err;
-		res.send('1');
-	})
-})
+	var sql="delete from hj_user where uid=?";
+	pool.query(sql,[$uid],(err,result)=>{
+	  if(err) throw err;
+	  res.send("1");//1表示删除成功
+	});
+});
+
+//修改
+router.post('/update',(req,res)=>{
+	var $uid=req.body.uid;
+	if(!$uid){
+	  res.send("用户id不存在");
+	  return;
+	}
+  
+	var $uname=req.body.uname;
+	if(!$uname){
+	  res.send("用户名称不存在");
+	  return;
+	}
+	
+	var $upwd=req.body.upwd;
+	if(!$upwd){
+	  res.send("用户密码不存在");
+	  return;
+	}
+	
+	var $email=req.body.email;
+	if(!$email){
+	  res.send("用户邮箱不存在");
+	  return;
+	}
+	var $phone=req.body.phone;
+	if(!$phone){
+	  res.send("用户联系方式不存在");
+	  return;
+	}
+	var $user_name=req.body.user_name;
+	if(!$user_name){
+	  res.send("用户真实姓名不存在");
+	  return;
+	}
+	var $gender=req.body.gender;
+	if(!$gender){
+	  res.send("用户性别不存在");
+	  return;
+	}  
+	var sql="update hj_user set uname=?,upwd=?,email=?,phone=?,user_name=?,gender=? where uid=?";
+  
+	pool.query(sql,[$uname,$upwd,$email,$phone,$user_name,$gender,$uid],(err,result)=>{
+	  if(err) throw err;
+	  res.send("<script>alert('修改成功！');location.href='http://localhost:2500/user_list.html'</script>");
+	
+	});
+});
+
 
 module.exports = router;

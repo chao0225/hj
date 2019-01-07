@@ -33,7 +33,7 @@ $(function(){
                                 <button type="button" class="btn p-0 text-white border-0 my_btn_gray">-</button>
                                 <input type="text" class="form-control my_input_w p-1 text-center" value="1"/>
                                 <button type="button" class="btn p-0 text-white border-0 my_btn_gray">+</button>
-                                <a href="#" class="btn pl-1 pr-1 my-bgcolor border-0"  data-lid="${lid}">加入购物车</a>
+                                <a href="http://localhost:2500/cart.html" class="btn pl-1 pr-1 my-bgcolor border-0"  data-lid="${lid}">加入购物车</a>
                             </div>
                         </div>
                     </div>
